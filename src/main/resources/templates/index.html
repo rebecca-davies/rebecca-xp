@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>rebecca.sh - Desktop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/fonts.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/desktop.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/taskbar.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/blue.css}" />
+</head>
+<body>
+<section id="desktop">
+    <div id="start-menu">
+        <span class="start-menu-text">Rebecca</span>
+        <span class="start-menu"><img th:src="@{/images/system/start.png}"></span>
+    </div>
+    <div id="documents">
+        <span id="documentsheader"><img th:src="@{/images/system/My-Documents.png}"></span>
+        <div id="files" th:utext="${populate}">
+
+        </div>
+    </div>
+    <div id="taskbar">
+        <div class="background sliced vertical">
+            <div class="row top"></div>
+            <div class="row middle"></div>
+            <div class="row bottom"></div>
+        </div>
+        <div id="start-button">
+            <div class="container">
+                <div class="background sliced">
+                    <div class="column left">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                    <div class="column middle">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                    <div class="column right">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <span class="icon"><img th:src="@{/images/system/WindowsLogo-small.png}" /></span>
+                    <span class="text">start</span>
+                </div>
+            </div>
+        </div>
+        <div id="task-band">
+        </div>
+        <div id="tray-notify">
+            <div class="container">
+                <div class="background sliced">
+                    <div class="column left">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                    <div class="column middle">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                    <div class="column right">
+                        <div class="row top"></div>
+                        <div class="row middle"></div>
+                        <div class="row bottom"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="clock">
+                        <div class="text" id="time"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" th:src="@{/js/taskbar.js}"></script>
+<script type="text/javascript" th:src="@{/js/drag.js}"></script>
+</body>
+</html>
