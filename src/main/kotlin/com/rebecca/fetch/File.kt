@@ -3,6 +3,7 @@ package com.rebecca.fetch
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.nio.file.Files
 
 /**
  *  Represents a file in a directory
@@ -11,9 +12,7 @@ import java.io.InputStreamReader
  *  @property size  the size of the file (kilobytes)
  *  @property type  the MIME type of the file
  */
-data class File(val name: String, val size: Long, val type: String?) {
-    constructor(name: String, size: Long) : this(name = name, size = size, type = "")
-}
+data class File(val name: String, val size: Long, val type: String?)
 
 /**
  *  Reads from the requested directory and returns a list of files.
@@ -21,9 +20,9 @@ data class File(val name: String, val size: Long, val type: String?) {
  *  @return a list of unordered files
  */
 fun instantiate(): List<File> {
-    return getResourceFiles(dir).map {
-        File(name = it, size = size(res = "$dir$it"))
-    }
+    return java.io.File(dir).listFiles()!!.map {
+        File(name = it.name, size = size(res = "$dir${it.name}"), type = it.getMimeType())
+    }.toList()
 }
 
 /**
@@ -33,26 +32,14 @@ fun instantiate(): List<File> {
  *  @return the length of the file in kilobytes
  */
 fun size(res: String): Long {
-    return java.io.File(ClassLoader.getSystemResource(res).file).length() / 1024 //TODO Precision
+    return java.io.File(res).length() / 1024 //TODO add precision
 }
 
 /**
- *  Fetches the files from the requested directory and returns a list of paths to files
+ *  Reads the files MIME type for categorization
  *
- *  @param path the path of the directory being scanned
- *  @return a list of paths to files in the directory
+ *  @return the MIME type as a string
  */
-fun getResourceFiles(path: String): List<String> = getResourceAsStream(resource = path).use { stream ->
-    return if(stream == null) emptyList()
-    else BufferedReader(InputStreamReader(stream)).readLines()
+fun java.io.File.getMimeType(): String? {
+    return Files.probeContentType(this.toPath())
 }
-
-/**
- *  Finds a resource with a given name
- *
- *  @param resource the resource being scanned in the directory
- *  @return an InputStream that feeds information from the directory
- */
-private fun getResourceAsStream(resource: String): InputStream? =
-    Thread.currentThread().contextClassLoader.getResourceAsStream(resource)
-        ?: resource::class.java.getResourceAsStream(resource)

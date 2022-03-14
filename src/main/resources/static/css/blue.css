@@ -318,14 +318,13 @@ https://github.com/tdcosta100
 }
 
 #file > p {
-	position:  absolute;
+    position: absolute;
 	font-family: Tahoma;
 	font-size: 13px;
-	margin-top: 18px;
-	margin-left: 7px;
 	color:  black;
-	text-decoration-style: none;
-	display: inline-flex;
+	display: flex;
+	margin-left: 60px;
+	margin-top: -35px;
 }
 
 #files {
@@ -357,18 +356,15 @@ https://github.com/tdcosta100
 }
 
 #name {
-    position: absolute;
-	margin-top: 8px !important;
-	font-size: 12px;
+    margin-top: -51px !important;
 }
+
 #type {
-	margin-top: 21.2px !important;
-	font-size:  11.8px !important;
-	color: #525252 !important;
+    margin-top: -39px !important;
+    color: #404040 !important;
 }
+
 #size {
-    position: absolute;
-	margin-top: 33.5px !important;
-	font-size:  11.8px !important;
-	color: #525252 !important;
+    margin-top: -26px !important;
+    color: #404040 !important;
 }

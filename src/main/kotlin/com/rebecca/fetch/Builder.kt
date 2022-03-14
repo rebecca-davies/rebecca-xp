@@ -1,6 +1,7 @@
 package com.rebecca.fetch
 
 import com.rebecca.fetch.template.folder
+import com.rebecca.fetch.template.image
 
 /**
  *  The built HTML being inserted after processing the current directory
@@ -8,7 +9,7 @@ import com.rebecca.fetch.template.folder
  *  @return the HTML being inserted into the template
  */
 fun built(): String {
-    return instantiate().sort().built()
+    return instantiate()!!.sort().built()
 }
 
 /**
@@ -28,5 +29,9 @@ private fun List<File>.built(): String {
  *  @return the <div> built and ready to be joined into a string of HTML
  */
 fun template(file: File): String {
-    return folder(file)
+    when(file.type) {
+        "image/png" -> return image(file)
+        null -> return folder(file)
+    }
+    return ""
 }

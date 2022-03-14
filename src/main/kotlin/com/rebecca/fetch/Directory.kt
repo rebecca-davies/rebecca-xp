@@ -11,4 +11,4 @@ fun List<File>.sort(): List<File> {
     })
 }
 
-var dir: String = "$top/example/"    //The current directory being observed
+var dir: String = "$top/example/test3/"    //The current directory being observed
