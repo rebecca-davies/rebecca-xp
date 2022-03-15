@@ -9,7 +9,7 @@ import com.rebecca.fetch.template.image
  *  @return the HTML being inserted into the template
  */
 fun built(): String {
-    return instantiate()!!.sort().built()
+    return instantiate().sort().built()
 }
 
 /**
@@ -17,7 +17,7 @@ fun built(): String {
  *
  *  @return the HTML ready to be inserted into the template
  */
-private fun List<File>.built(): String {
+private fun List<FileData>.built(): String {
     return this.joinToString(separator = "") {
         template(it)
     }
@@ -28,7 +28,7 @@ private fun List<File>.built(): String {
  *
  *  @return the <div> built and ready to be joined into a string of HTML
  */
-fun template(file: File): String {
+fun template(file: FileData): String {
     when(file.type) {
         "image/png" -> return image(file)
         null -> return folder(file)

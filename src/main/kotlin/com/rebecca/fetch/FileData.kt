@@ -1,8 +1,6 @@
 package com.rebecca.fetch
 
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
+import java.io.File
 import java.nio.file.Files
 
 /**
@@ -12,16 +10,16 @@ import java.nio.file.Files
  *  @property size  the size of the file (kilobytes)
  *  @property type  the MIME type of the file
  */
-data class File(val name: String, val size: Long, val type: String?)
+data class FileData(val name: String, val size: Long, val type: String?, val path: String)
 
 /**
  *  Reads from the requested directory and returns a list of files.
  *
  *  @return a list of unordered files
  */
-fun instantiate(): List<File> {
-    return java.io.File(dir).listFiles()!!.map {
-        File(name = it.name, size = size(res = "$dir${it.name}"), type = it.getMimeType())
+fun instantiate(): List<FileData> {
+    return File(dir).listFiles()!!.map {
+        FileData(name = it.name, size = size(it), type = it.getMimeType(), path = it.path)
     }.toList()
 }
 
@@ -31,8 +29,8 @@ fun instantiate(): List<File> {
  *  @param res  the path of the file being measured
  *  @return the length of the file in kilobytes
  */
-fun size(res: String): Long {
-    return java.io.File(res).length() / 1024 //TODO add precision
+fun size(file: File): Long {
+    return file.length() / 1024 //TODO add precision
 }
 
 /**
@@ -40,6 +38,6 @@ fun size(res: String): Long {
  *
  *  @return the MIME type as a string
  */
-fun java.io.File.getMimeType(): String? {
+fun File.getMimeType(): String? {
     return Files.probeContentType(this.toPath())
 }

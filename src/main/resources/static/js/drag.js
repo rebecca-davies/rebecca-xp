@@ -1,10 +1,10 @@
 $(document).on("dblclick", "#file", function() {
-
+   $('#files').load("", "hash="+$(this).attr("data"), function() {
+        $(this).children(':first').unwrap();
+     });
 });
+
 dragElement(document.getElementById("documents"));
-
-
-
 
 function dragElement(elmnt) {
 
