@@ -18,7 +18,7 @@ fun built(): String {
  *  @return the HTML ready to be inserted into the template
  */
 private fun List<FileData>.built(): String {
-    return this.joinToString(separator = "") {
+    return joinToString(separator = "") {
         template(it)
     }
 }

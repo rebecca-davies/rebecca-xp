@@ -11,11 +11,9 @@ var dir: String = "$top/example/"    //The current directory being observed
  *  @return a list of files sorted by extension for a directory
  */
 fun List<FileData>.sort(): List<FileData> {
-    val sorted = sortedWith(compareBy { file ->
+    return sortedWith(compareBy { file ->
         file.name.contains(other = ".")
-    })
-    sorted.render()
-    return sorted
+    }).also { render() }
 }
 
 /**

@@ -26,7 +26,7 @@ fun instantiate(): List<FileData> {
 /**
  *  Reads the length of the fed file into kilobytes.
  *
- *  @param res  the path of the file being measured
+ *  @param file  the path of the file being measured
  *  @return the length of the file in kilobytes
  */
 fun size(file: File): Long {
@@ -39,5 +39,5 @@ fun size(file: File): Long {
  *  @return the MIME type as a string
  */
 fun File.getMimeType(): String? {
-    return Files.probeContentType(this.toPath())
+    return Files.probeContentType(toPath())
 }

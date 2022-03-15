@@ -17,7 +17,7 @@ fun folder(file: FileData): String {
     return with(tagConsumer) {
         div {
             id = "file"
-            attributes["data"] = file.hashCode().toString()
+            attributes["data"] = "${file.hashCode()}"
             img(classes = "file") {
                 src = folderIcon
             }

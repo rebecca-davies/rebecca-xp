@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 
 /**
- *  The observer class of any /index requests
+ *  The observer class of any / requests
  */
 @Controller
 class IndexController {
@@ -23,14 +23,9 @@ class IndexController {
      *  @return returns the .html file or #files depending on whether the hash is null
      */
     @GetMapping("/")
-    fun index(@RequestParam(value = "hash", required = false) hash : String?, model : Model) : String {
-        hash?.let {
-            dir = directory[hash]?.path.toString()
-        }
+    fun index(@RequestParam(value = "hash", required = false) hash : String?, model : Model) : String? {
+        hash?.let { dir = directory[hash]?.path.toString() }
         model["populate"] = fetch()
-        return when(hash.isNullOrEmpty()) {
-            false -> "index :: #files"
-            true -> "index"
-        }
+        return if(hash.isNullOrEmpty()) "index" else "index :: #files"
     }
 }
